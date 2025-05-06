@@ -1,30 +1,3 @@
-// function showTable(categoryId) {
-//   const allTabs = document.querySelectorAll(".tab");
-//   const allTables = document.querySelectorAll(".table-container");
-
-//   allTabs.forEach((tab) => tab.classList.remove("active"));
-//   allTables.forEach((table) => table.classList.remove("active"));
-
-//   document.getElementById(categoryId).classList.add("active");
-//   event.target.classList.add("active");
-// }
-
-// function showTable(tableElementID) {
-//   const allTabs = document.querySelectorAll(".tab");
-//   const allTables = document.querySelectorAll(".table-container");
-
-//   allTabs.forEach(function (tab) {
-//     tab.classList.remove("active");
-//   });
-
-//   allTables.forEach(function (table) {
-//     table.classList.remove("active");
-//   });
-
-//   document.getElementById(tableElementID).classList.add("active");
-//   event.target.classList.add("active");
-// }
-
 function toggleFilters() {
   const filterSection = document.getElementById("filterSection");
   filterSection.style.display =
@@ -65,19 +38,29 @@ function filterTable() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Set product name
-  const prodAEl = document.querySelector(".prodA");
-  const storedProduct = localStorage.getItem("productName");
-  if (prodAEl && storedProduct) {
-    prodAEl.textContent = storedProduct;
-    console.log("✅ Set product name:", storedProduct);
-  }
+  const productEls = document.querySelectorAll(".prodA.clickable");
 
-  // Set client name
-  const clientAEl = document.querySelector(".clientA");
+  productEls.forEach((prodEl) => {
+    prodEl.addEventListener("click", function () {
+      const productName = prodEl.textContent.trim();
+
+      const parentRow = prodEl.closest("tr");
+      const clientEl = parentRow.querySelector(".clientA");
+      const clientName = clientEl ? clientEl.textContent.trim() : "";
+
+      localStorage.setItem("productName", productName);
+      localStorage.setItem("clientName", clientName);
+
+      window.location.href = "pages/details.html";
+    });
+  });
+
+  const storedProduct = localStorage.getItem("productName");
   const storedClient = localStorage.getItem("clientName");
-  if (clientAEl && storedClient) {
-    clientAEl.textContent = storedClient;
-    console.log("✅ Set client name:", storedClient);
-  }
+
+  const prodAEl = document.querySelector(".prodA");
+  const clientAEl = document.querySelector(".clientA");
+
+  if (prodAEl && storedProduct) prodAEl.textContent = storedProduct;
+  if (clientAEl && storedClient) clientAEl.textContent = storedClient;
 });

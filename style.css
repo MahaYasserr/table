@@ -252,3 +252,8 @@ td {
     font-size: 1.5rem;
   }
 }
+
+.clickable {
+  cursor: pointer;
+  text-decoration: underline;
+}

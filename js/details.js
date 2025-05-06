@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Save product name
   const prodOneEl = document.querySelector(".prodOne");
   if (prodOneEl) {
     const productName = prodOneEl.textContent.trim();
@@ -7,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ Saved product name:", productName);
   }
 
-  // Save client name
   const clientOneEl = document.querySelector(".clientOne");
   if (clientOneEl) {
     const clientName = clientOneEl.textContent.trim();
